@@ -1,8 +1,10 @@
+import { useState } from "react";
+import { useCounter } from "./Hooks/hook1";
 function App() {
-  return(
+return(
     <>
+
     </>
   )
 }
-
 export default App
