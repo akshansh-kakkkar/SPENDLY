@@ -1,9 +1,12 @@
+import Dashboard from "./Components/Dashboard"
+import Sidebar from "./Components/Sidebar"
 
-import Dashboard from "./Components/Dashboard";
 function App() {
 return(
     <>
-    <div className="w-[100vw] h-screen">
+    <div className="w-screen flex bg-purple-50">
+      <Sidebar />
+      <Dashboard />
 
     </div>
     </>
