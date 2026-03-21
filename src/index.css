@@ -1,1 +1,8 @@
-@import "tailwindcss"
+@import "tailwindcss";
+.poppins{
+    font-family: "poppins", sans-serif;
+}
+
+.roboto{
+    font-family: "Roboto", sans-serif;
+}

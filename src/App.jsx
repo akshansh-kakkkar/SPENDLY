@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { useCounter } from "./Hooks/hook1";
+
+import Dashboard from "./Components/Dashboard";
 function App() {
 return(
     <>
+    <div className="w-[100vw] h-screen">
 
+    </div>
     </>
   )
 }
