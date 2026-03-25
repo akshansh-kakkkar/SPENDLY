@@ -12,7 +12,7 @@ return(
       <Route path="/" element={<Dashboard/>} />
       <Route path="/stats" element={<Stats/>} />
      </Routes>
-
+     
     </div>
     </>
   )

@@ -1,62 +1,63 @@
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 
 export const useExpenses = () => {
   const [expenses, setExpenses] = useState([]);
   const [searchExpenses, setSearchExpenses] = useState("");
   const [category, setCategory] = useState("All");
   const [fromDate, setFromDate] = useState("");
-  const [todate, setTodate] = useState("");
+  const [toDate, setToDate] = useState("");
 
   const addExpense = (expense) => {
     setExpenses((prev) => [...prev, expense]);
   };
 
   const filteredExpense = useMemo(() => {
-    return expenses.filter(
-      (expense) => {
-        const matchSearch = expense.title
-          .tolowercase()
-          .includes(searchExpenses.tolowercase());
-        const matchCategory =
-          category === "All" || expense.category === category;
-        const matchFrom = !fromDate || expense.fromDate >= fromDate;
-        const matchTo = !todate || expense.todate >= todate;
-        return matchSearch && matchCategory && matchFrom && matchTo;
-      },
-      [category, expenses, searchExpenses, fromDate, todate],
-    );
-  });
+    return expenses.filter((expense) => {
+      const matchSearch = expense.title
+        .toLowerCase()
+        .includes(searchExpenses.toLowerCase());
 
-  const totalEnteries = filteredExpense.length();
+      const matchCategory =
+        category === "All" || expense.category === category;
 
-  const totalSpending = useMemo(()=>{
-    return filteredExpense.reduce((sum, e)=> sum = e.amount, 0)
-  } ,[filteredExpense]);
+      const matchFrom = !fromDate || expense.date >= fromDate;
+      const matchTo = !toDate || expense.date <= toDate;
 
-  const monthlyExpenses = useMemo(()=>{
+      return matchSearch && matchCategory && matchFrom && matchTo;
+    });
+  }, [expenses, searchExpenses, category, fromDate, toDate]);
+
+  const totalEntries = filteredExpense.length;
+
+  const totalSpending = useMemo(() => {
+    return filteredExpense.reduce((sum, e) => sum + e.amount, 0);
+  }, [filteredExpense]);
+
+  const monthlyExpenses = useMemo(() => {
     const thisMonth = new Date().getMonth();
-    return expenses.filter((e)=>
-        new Date(e.date).getMonth()=== thisMonth
-    ).reduce((sum,e)=> sum+e.amount , 0)
-  }, [expenses])
 
+    return expenses
+      .filter(
+        (e) => new Date(e.date).getMonth() === thisMonth
+      )
+      .reduce((sum, e) => sum + e.amount, 0);
+  }, [expenses]);
 
-  return{
+  return {
     expenses,
     addExpense,
     filteredExpense,
-    totalEnteries,
+    totalEntries,
     setExpenses,
     searchExpenses,
     setSearchExpenses,
-    setCategory,
     category,
+    setCategory,
     fromDate,
     setFromDate,
-    todate,
-    setTodate,
-    totalEnteries,
+    toDate,
+    setToDate,
     totalSpending,
-    monthlyExpenses
-  }
+    monthlyExpenses,
+  };
 };
