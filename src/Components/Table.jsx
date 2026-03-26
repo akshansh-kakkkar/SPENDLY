@@ -1,17 +1,28 @@
 import { Card, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import { EditExpenseModal } from "../Modals/EditExpenseModal";
+import { DeleteModaal } from "../Modals/DeleteExpenseModall";
 
 const TABLE_HEAD = ["Title", "Category", "Date", "Amount", "Actions"];
-export function TableWithoutBorder({ expenses = [], editExpense }) {
+export function TableWithoutBorder({ expenses = [], editExpense, deleteExpense }) {
   const [open, setOpen] = useState(false);
   const [editingExpense, setEditingExpense] = useState(null);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
   const handeEdit = (expense) => {
     setOpen(true);
     setEditingExpense(expense);
   };
   return (
     <Card className=" w-[80vw] h-[40vh] overflow-scroll">
+      <DeleteModaal 
+        open={deleteOpen}
+        onClose={() => setDeleteOpen(false)}
+        onConfirm={() => {
+          deleteExpense(selectedId);
+          setDeleteOpen(false);
+        }}
+      />
       <EditExpenseModal
         onOpen={open}
         onClose={() => {
@@ -76,8 +87,21 @@ export function TableWithoutBorder({ expenses = [], editExpense }) {
                 </td>
                 <td className="p-4 border-b border-l border-gray-300">
                   <div className="flex justify-around items-center gap-2">
-                    <img src="/assets/edit.svg" alt="" width={30} onClick={()=>handeEdit(exp)} />
-                    <img src="/assets/bin.png" width={30} alt="" />
+                    <img
+                      src="/assets/edit.svg"
+                      alt=""
+                      width={30}
+                      onClick={() => handeEdit(exp)}
+                    />
+                    <img
+                      onClick={() => {
+                        setSelectedId(exp.id);
+                        setDeleteOpen(true);
+                      }}
+                      src="/assets/bin.png"
+                      width={30}
+                      alt=""
+                    />
                   </div>
                 </td>
               </tr>

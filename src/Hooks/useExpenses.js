@@ -6,6 +6,7 @@ export const useExpenses = () => {
   const [category, setCategory] = useState("All");
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
+  const [budget, setBudget] = useState(2000);
 
   const addExpense = (expense) => {
     setExpenses((prev) => [...prev, expense]);
@@ -66,5 +67,7 @@ export const useExpenses = () => {
     setToDate,
     totalSpending,
     monthlyExpenses,
+    budget,
+    setBudget,
   };
 };
