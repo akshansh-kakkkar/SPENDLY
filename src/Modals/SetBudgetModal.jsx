@@ -25,10 +25,10 @@ const SetBudgetModal = ({ onOpen, onClose, budget, setBudget }) => {
         className="absolute inset-0 bg-[#00000045] " 
         onClick={onClose}
       ></div>
-      <div className="relative bg-white h-[280px] w-[450px] rounded-2xl shadow-2xl p-8 animate-scaleIn flex flex-col justify-between">
+      <div className="relative bg-white h-[280px] w-[350px] sm:w-[450px] rounded-2xl shadow-2xl p-8 animate-scaleIn flex flex-col justify-between">
         <div>
           <div className="flex poppins justify-between items-center mb-6">
-            <div className="text-2xl flex items-center justify-center gap-3 capitalize font-semibold">
+            <div className="text-xl sm:text-2xl flex items-center gap-2 sm:gap-3 capitalize font-semibold">
               <span>
                 <img
                   width={40}

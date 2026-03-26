@@ -1,5 +1,5 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from "react";
+import { NavLink } from "react-router-dom";
 const Sidebar = () => {
   return (
     <div className="h-screen sticky top-0 hidden lg:block w-[17vw] bg-white border-r border-purple-100">
@@ -25,7 +25,12 @@ const Sidebar = () => {
               }`
             }
           >
-            <img width={20} src="/assets/dasboard.svg" alt="" className="active:invert" />
+            <img
+              width={20}
+              src="/assets/dasboard.svg"
+              alt=""
+              className="active:invert"
+            />
             Dashboard
           </NavLink>
           <NavLink
@@ -43,7 +48,7 @@ const Sidebar = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

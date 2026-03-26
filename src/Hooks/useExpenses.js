@@ -1,22 +1,38 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 export const useExpenses = () => {
-  const [expenses, setExpenses] = useState([]);
+  const [expenses, setExpenses] = useState(() => {
+    const saved = localStorage.getItem("expenses");
+    return saved ? JSON.parse(saved) : [];
+  });
   const [searchExpenses, setSearchExpenses] = useState("");
   const [category, setCategory] = useState("All");
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
-  const [budget, setBudget] = useState(2000);
+  const [budget, setBudget] = useState(() => {
+    const saved = localStorage.getItem("budget");
+    return saved ? Number(saved) : 2000;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }, [expenses]);
+
+  useEffect(() => {
+    localStorage.setItem("budget", budget.toString());
+  }, [budget]);
 
   const addExpense = (expense) => {
     setExpenses((prev) => [...prev, expense]);
   };
-  const deleteExpense = (id)=>{
-    setExpenses((prev)=> prev.filter((e)=>e.id!==id));
-  }
-  const editExpense = (updatedExpenses)=>{
-    setExpenses((prev)=> prev.map((e)=> e.id === updatedExpenses.id ? updatedExpenses : e))
-  }
+  const deleteExpense = (id) => {
+    setExpenses((prev) => prev.filter((e) => e.id !== id));
+  };
+  const editExpense = (updatedExpenses) => {
+    setExpenses((prev) =>
+      prev.map((e) => (e.id === updatedExpenses.id ? updatedExpenses : e))
+    );
+  };
   const filteredExpense = useMemo(() => {
     return expenses.filter((expense) => {
       const matchSearch = expense.title

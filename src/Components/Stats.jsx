@@ -54,22 +54,35 @@ const Stats = ({ expenses = [] }) => {
     amount: categoryData[key],
   }));
   return (
-    <div className="h-[86vh] w-full flex">
-      <div className="bg-white p-4 rounded-xl shadow m-6">
-        <div className="text-xl font-semibold text-purple-700 mb-3">
+    <div className="min-h-[86vh] w-full flex flex-col lg:flex-row lg:flex-wrap justify-center items-start gap-6 p-6">
+      <div className="bg-white p-6 rounded-2xl shadow-lg w-full lg:w-[calc(50%-1.5rem)] min-w-[300px] animate-scaleIn">
+        <div className="text-xl font-semibold text-purple-700 mb-6 flex items-center gap-2">
+          <span className="w-2 h-6 bg-purple-600 rounded-full"></span>
           Bar Chart
         </div>
-        <div className="w-[550px] h-[400px]">
-          <ResponsiveContainer>
-            <BarChart data={data} barCategoryGap="5%">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="category" />
-              <YAxis />
-              <Tooltip />
+        <div className="w-full h-[350px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={data} barCategoryGap="10%">
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3e8ff" />
+              <XAxis 
+                dataKey="category" 
+                axisLine={false} 
+                tickLine={false} 
+                tick={{fill: '#7c3aed', fontSize: 12}}
+              />
+              <YAxis 
+                axisLine={false} 
+                tickLine={false} 
+                tick={{fill: '#7c3aed', fontSize: 12}}
+              />
+              <Tooltip 
+                cursor={{fill: '#f5f3ff'}}
+                contentStyle={{borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'}}
+              />
               <Bar
                 dataKey="amount"
-                radius={[12, 12, 0, 0]}
-                barSize={35}
+                radius={[8, 8, 0, 0]}
+                barSize={40}
               >
                 {data.map((entry, index) => (
                   <Cell
@@ -82,20 +95,23 @@ const Stats = ({ expenses = [] }) => {
           </ResponsiveContainer>
         </div>
       </div>
-      <div className="bg-white p-4 rounded-xl shadow m-6">
-        <div className="text-xl font-semibold text-purple-700 mb-3">
+
+      <div className="bg-white p-6 rounded-2xl shadow-lg w-full lg:w-[calc(50%-1.5rem)] min-w-[300px] animate-scaleIn">
+        <div className="text-xl font-semibold text-purple-700 mb-6 flex items-center gap-2">
+          <span className="w-2 h-6 bg-purple-600 rounded-full"></span>
           Pie Chart
         </div>
-        <div className="w-[550px] h-[400px]">
-          <ResponsiveContainer>
+        <div className="w-full h-[350px]">
+          <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 data={data}
                 dataKey="amount"
                 nameKey="category"
-                outerRadius={110}
-                innerRadius={50}
-                paddingAngle={3}
+                outerRadius="80%"
+                innerRadius="50%"
+                paddingAngle={5}
+                stroke="none"
               >
                 {data.map((entry, index) => (
                   <Cell
@@ -104,8 +120,10 @@ const Stats = ({ expenses = [] }) => {
                   />
                 ))}
               </Pie>
-              <Tooltip />
-              <Legend />
+              <Tooltip 
+                contentStyle={{borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'}}
+              />
+              <Legend verticalAlign="bottom" height={36}/>
             </PieChart>
           </ResponsiveContainer>
         </div>
