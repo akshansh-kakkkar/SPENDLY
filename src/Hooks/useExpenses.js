@@ -10,7 +10,12 @@ export const useExpenses = () => {
   const addExpense = (expense) => {
     setExpenses((prev) => [...prev, expense]);
   };
-
+  const deleteExpense = (id)=>{
+    setExpenses((prev)=> prev.filter((e)=>e.id!==id));
+  }
+  const editExpense = (updatedExpenses)=>{
+    prev.map((e)=> e.id === updatedExpenses.id ? updatedExpenses : e)
+  }
   const filteredExpense = useMemo(() => {
     return expenses.filter((expense) => {
       const matchSearch = expense.title
@@ -50,6 +55,8 @@ export const useExpenses = () => {
     totalEntries,
     setExpenses,
     searchExpenses,
+    deleteExpense,
+    editExpense,
     setSearchExpenses,
     category,
     setCategory,

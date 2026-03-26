@@ -1,31 +1,12 @@
 import React, { useState } from "react";
 import "../index.css";
-const AddExpenseModal = ({ onOpen, onClose, addExpense }) => {
+export const EditExpenseModal = ({ onOpen, onClose, addExpense }) => {
   const [title, settitle] = useState('')
   const [Amount, setAmount] = useState('')
   const [category, setCategory] = useState('food')
   const [date, setDate] = useState('')
-  if (!onOpen) return null;
-  const handleAdd = () => {
-    if (!title || !Amount || !date || !category) {
-      alert("Please fill all the fields");
-      return;
-    }
-    const newExpense = {
-      id: Date.now(),
-      title,
-      amount: Number(Amount),
-      date,
-      category
-    }
-    addExpense(newExpense);
-    settitle(""),
-      setAmount(""),
-      setCategory("food")
-    setDate("")
-
-    onClose()
-  }
+  if (!onOpen) return null
+  '
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-center ">
       <div className="absolute inset-0 bg-[#00000045] " onClick={onClose}></div>
@@ -129,4 +110,4 @@ const AddExpenseModal = ({ onOpen, onClose, addExpense }) => {
   );
 };
 
-export default AddExpenseModal;
+

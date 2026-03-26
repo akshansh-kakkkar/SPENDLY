@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../index.css";
 import AddExpenseModal from "../Modals/AddExpenseModal";
 import { useExpenses } from "../Hooks/useExpenses";
+import { TableWithoutBorder } from "./Table";
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
 
@@ -125,15 +126,20 @@ const Dashboard = () => {
               <img src="/assets/reset.svg" width={40} alt="reset" />
             </button>
           </div>
+          {filteredExpense.length=== 0 ?(
           <div className="flex justify-center items-center mb-9 shadow-[0_4px_12px_rgba(168,85,247,0.12)] m-6 bg-white h-[40vw] xl:h-[20vw] rounded-xl flex-col">
             <div>
-              {" "}
+
               <img src="/assets/empty.png" className="h-[15vw]" alt="" />
             </div>
-            <p className="text-md poppins text-gray-400">
+           <p className="text-md poppins text-gray-400">
               No expenses yet. Start adding one.
             </p>
-          </div>
+          </div>):(
+            <div  className="flex justify-center items-center mb-9 shadow-[0_4px_12px_rgba(168,85,247,0.12)] m-6 bg-white h-[40vw] xl:h-[20vw] rounded-xl flex-col">
+            <TableWithoutBorder expenses={filteredExpense} />
+            </div>
+          )}
         </div>
       </div>
     </>
