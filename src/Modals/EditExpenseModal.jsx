@@ -1,12 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../index.css";
-export const EditExpenseModal = ({ onOpen, onClose, addExpense }) => {
+export const EditExpenseModal = ({ onOpen, onClose, addExpense, editExpense, editingExpense }) => {
+    
   const [title, settitle] = useState('')
   const [Amount, setAmount] = useState('')
   const [category, setCategory] = useState('food')
   const [date, setDate] = useState('')
-  if (!onOpen) return null
-  '
+  useEffect(()=>{
+    if(editingExpense){
+        settitle(editingExpense.title)
+        setAmount(editingExpense.amount)
+        setCategory(editingExpense.category)
+        setDate(editingExpense.date)
+    }
+  }, [editingExpense])
+  if (!onOpen) return null;
+  const handleEdit = () => {
+    if (!title || !Amount || !date || !category) {
+      alert("Please fill all the fields");
+      return;
+    }
+    const ExpenseData = {
+      id: editingExpense ? editingExpense.id : Date.now(),
+      title,
+      amount: Number(Amount),
+      date,
+      category
+    }
+    if(editingExpense){
+        editExpense(ExpenseData)
+    }
+    else{
+        addExpense(ExpenseData)
+    }
+    settitle(""),
+      setAmount(""),
+      setCategory("food")
+    setDate("")
+
+    onClose()
+  }
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-center ">
       <div className="absolute inset-0 bg-[#00000045] " onClick={onClose}></div>
@@ -22,7 +55,7 @@ export const EditExpenseModal = ({ onOpen, onClose, addExpense }) => {
                   alt="cart"
                 />
               </span>
-              Add Expense
+              Edit Expense
             </div>
             <div
               className="cursor-pointer hover:scale-[101%] transition-all duration-300"
@@ -102,7 +135,7 @@ export const EditExpenseModal = ({ onOpen, onClose, addExpense }) => {
 
           </div>
           <div className="flex justify-end mx-3 items-center text-xl font-bold rounded-xl"   >
-            <button onClick={handleAdd} className="bg-purple-700 flex items-center gap-1 text-white roboto text-xl px-3 py-1 rounded-xl "><img width={30} src="/assets/add.svg" alt="add" />ADD</button>
+            <button onClick={handleEdit} className="bg-purple-700 flex items-center gap-1 text-white roboto text-xl px-3 py-1 rounded-xl "><img width={30} src="/assets/add.svg" alt="add" />UPDATE</button>
           </div>
         </div>
       </div>

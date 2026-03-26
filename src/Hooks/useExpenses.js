@@ -14,7 +14,7 @@ export const useExpenses = () => {
     setExpenses((prev)=> prev.filter((e)=>e.id!==id));
   }
   const editExpense = (updatedExpenses)=>{
-    prev.map((e)=> e.id === updatedExpenses.id ? updatedExpenses : e)
+    setExpenses((prev)=> prev.map((e)=> e.id === updatedExpenses.id ? updatedExpenses : e))
   }
   const filteredExpense = useMemo(() => {
     return expenses.filter((expense) => {

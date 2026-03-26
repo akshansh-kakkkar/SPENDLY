@@ -6,7 +6,7 @@ import { TableWithoutBorder } from "./Table";
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
 
-  const {addExpense, filteredExpense, totalSpending} = useExpenses()
+  const { addExpense, editExpense, filteredExpense, totalSpending } = useExpenses();
   return (
     <>
       <div>
@@ -16,10 +16,9 @@ const Dashboard = () => {
               Dashboard
             </div>
 
-
             <div className="">
               <button
-                onClick={() => setOpen(true)} 
+                onClick={() => setOpen(true)}
                 className="flex  justify-center gap-1 shadow-[0_6px_18px_rgba(147,51,234,0.35)] items-center font-medium text-center text-md text-white px-3 py-2 rounded-xl bg-purple-800 poppins"
               >
                 <img width={30} src="/assets/add.svg" alt="add" />
@@ -27,7 +26,11 @@ const Dashboard = () => {
               </button>
             </div>
           </div>
-          <AddExpenseModal onOpen={open} onClose={() => setOpen(false)} addExpense={addExpense}/>
+          <AddExpenseModal
+            onOpen={open}
+            onClose={() => setOpen(false)}
+            addExpense={addExpense}
+          />
           <div className="grid gap-5 sm:grid-cols-2 2xl:grid-cols-4 mx-8">
             <div className="col-span-1 flex flex-col gap-8 py-1 shadow-[0_4px_12px_rgba(168,85,247,0.12)] justify-between bg-white min-w-20 min-h-35 rounded-xl">
               <div className="flex justify-between mt-6 mx-6">
@@ -126,18 +129,18 @@ const Dashboard = () => {
               <img src="/assets/reset.svg" width={40} alt="reset" />
             </button>
           </div>
-          {filteredExpense.length=== 0 ?(
-          <div className="flex justify-center items-center mb-9 shadow-[0_4px_12px_rgba(168,85,247,0.12)] m-6 bg-white h-[40vw] xl:h-[20vw] rounded-xl flex-col">
-            <div>
-
-              <img src="/assets/empty.png" className="h-[15vw]" alt="" />
+          {filteredExpense.length === 0 ? (
+            <div className="flex justify-center items-center mb-9 shadow-[0_4px_12px_rgba(168,85,247,0.12)] m-6 bg-white h-[40vw] xl:h-[20vw] rounded-xl flex-col">
+              <div>
+                <img src="/assets/empty.png" className="h-[15vw]" alt="" />
+              </div>
+              <p className="text-md poppins text-gray-400">
+                No expenses yet. Start adding one.
+              </p>
             </div>
-           <p className="text-md poppins text-gray-400">
-              No expenses yet. Start adding one.
-            </p>
-          </div>):(
-            <div  className="flex justify-center items-center mb-9 shadow-[0_4px_12px_rgba(168,85,247,0.12)] m-6 bg-white h-[40vw] xl:h-[20vw] rounded-xl flex-col">
-            <TableWithoutBorder expenses={filteredExpense} />
+          ) : (
+            <div className="flex justify-center items-center mb-9 shadow-[0_4px_12px_rgba(168,85,247,0.12)] m-6 bg-white h-[40vw] xl:h-[20vw] rounded-xl flex-col">
+              <TableWithoutBorder expenses={filteredExpense} editExpense={editExpense} />
             </div>
           )}
         </div>
