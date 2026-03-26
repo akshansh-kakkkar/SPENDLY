@@ -2,17 +2,19 @@ import { Route, Routes } from "react-router-dom"
 import Dashboard from "./Components/Dashboard"
 import Sidebar from "./Components/Sidebar"
 import Stats from "./Components/Stats"
+import { useExpenses } from "./Hooks/useExpenses"
 
 function App() {
+  const expenseState = useExpenses();
+
   return (
     <>
-      <div className="w-screen flex justify-center bg-purple-50">
+      <div className="w-screen min-h-screen flex justify-center bg-purple-50">
         <Sidebar />
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/stats" element={<Stats />} />
+          <Route path="/" element={<Dashboard {...expenseState} />} />
+          <Route path="/stats" element={<Stats expenses={expenseState.expenses} />} />
         </Routes>
-
       </div>
     </>
   )

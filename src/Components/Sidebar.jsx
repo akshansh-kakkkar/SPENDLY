@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 const Sidebar = () => {
   return (
-    <div className="h-[100vh] hidden lg:block lg:w-[15vw] bg-white border-r border-purple-100">
+    <div className="h-screen sticky top-0 hidden lg:block w-[17vw] bg-white border-r border-purple-100">
       <div className="flex justify-center mt-6 items-center gap-3">
         <img src="/assets/Image.svg" width={40} alt="" />
         <p className="text-3xl poppins font-semibold text-purple-800">

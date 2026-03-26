@@ -1,32 +1,29 @@
 import { useState } from "react";
 import "../index.css";
 import AddExpenseModal from "../Modals/AddExpenseModal";
-import { useExpenses } from "../Hooks/useExpenses";
 import { TableWithoutBorder } from "./Table";
 import SetBudgetModal from "../Modals/SetBudgetModal";
-const Dashboard = () => {
+const Dashboard = ({
+  addExpense,
+  editExpense,
+  deleteExpense,
+  filteredExpense,
+  totalSpending,
+  monthlyExpenses,
+  totalEntries,
+  budget,
+  setBudget,
+  searchExpenses,
+  setSearchExpenses,
+  category,
+  setCategory,
+  fromDate,
+  setFromDate,
+  toDate,
+  setToDate,
+}) => {
   const [open, setOpen] = useState(false);
   const [budgetOpen, setBudgetOpen] = useState(false);
-
-  const {
-    addExpense,
-    editExpense,
-    deleteExpense,
-    filteredExpense,
-    totalSpending,
-    monthlyExpenses,
-    totalEntries,
-    budget,
-    setBudget,
-    searchExpenses,
-    setSearchExpenses,
-    category,
-    setCategory,
-    fromDate,
-    setFromDate,
-    toDate,
-    setToDate,
-  } = useExpenses();
 
   const handleReset = () => {
     setSearchExpenses("");
@@ -103,7 +100,7 @@ const Dashboard = () => {
                 <div className="text-xl font-medium uppercase text-purple-500">
                   Budget
                 </div>
-                <div 
+                <div
                   className="cursor-pointer hover:scale-110 transition-all duration-300 bg-purple-50 p-1 rounded-lg"
                   onClick={() => setBudgetOpen(true)}
                 >
@@ -119,88 +116,80 @@ const Dashboard = () => {
             <div
               onClick={() => setCategory("All")}
               className={`px-8 py-2 rounded-2xl cursor-pointer font-medium text-sm
-    ${
-      category === "All"
-        ? "bg-purple-700 text-white"
-        : "bg-purple-100 text-purple-400"
-    }`}
+    ${category === "All"
+                  ? "bg-purple-700 text-white"
+                  : "bg-purple-100 text-purple-400"
+                }`}
             >
               All
             </div>
             <div
               onClick={() => setCategory("food")}
               className={`px-8 py-2 rounded-2xl cursor-pointer font-medium text-sm
-    ${
-      category === "food"
-        ? "bg-purple-700 text-white"
-        : "bg-purple-100 text-purple-400"
-    }`}
+    ${category === "food"
+                  ? "bg-purple-700 text-white"
+                  : "bg-purple-100 text-purple-400"
+                }`}
             >
               Food
             </div>
             <div
               onClick={() => setCategory("transport")}
               className={`px-8 py-2 rounded-2xl cursor-pointer font-medium text-sm
-    ${
-      category === "transport"
-        ? "bg-purple-700 text-white"
-        : "bg-purple-100 text-purple-400"
-    }`}
+    ${category === "transport"
+                  ? "bg-purple-700 text-white"
+                  : "bg-purple-100 text-purple-400"
+                }`}
             >
               Transport
             </div>
             <div
               onClick={() => setCategory("entertainment")}
               className={`px-8 py-2 rounded-2xl cursor-pointer font-medium text-sm
-    ${
-      category === "entertainment"
-        ? "bg-purple-700 text-white"
-        : "bg-purple-100 text-purple-400"
-    }`}
+    ${category === "entertainment"
+                  ? "bg-purple-700 text-white"
+                  : "bg-purple-100 text-purple-400"
+                }`}
             >
               Entertainment
             </div>
             <div
               onClick={() => setCategory("shopping")}
               className={`px-8 py-2 rounded-2xl cursor-pointer font-medium text-sm
-    ${
-      category === "shopping"
-        ? "bg-purple-700 text-white"
-        : "bg-purple-100 text-purple-400"
-    }`}
+    ${category === "shopping"
+                  ? "bg-purple-700 text-white"
+                  : "bg-purple-100 text-purple-400"
+                }`}
             >
               Shopping
             </div>
             <div
               onClick={() => setCategory("recharge")}
               className={`px-8 py-2 rounded-2xl cursor-pointer font-medium text-sm
-    ${
-      category === "recharge"
-        ? "bg-purple-700 text-white"
-        : "bg-purple-100 text-purple-400"
-    }`}
+    ${category === "recharge"
+                  ? "bg-purple-700 text-white"
+                  : "bg-purple-100 text-purple-400"
+                }`}
             >
               Recharge & Bills
             </div>
             <div
               onClick={() => setCategory("health")}
               className={`px-8 py-2 rounded-2xl cursor-pointer font-medium text-sm
-    ${
-      category === "health"
-        ? "bg-purple-700 text-white"
-        : "bg-purple-100 text-purple-400"
-    }`}
+    ${category === "health"
+                  ? "bg-purple-700 text-white"
+                  : "bg-purple-100 text-purple-400"
+                }`}
             >
               Health
             </div>
             <div
               onClick={() => setCategory("others")}
               className={`px-8 py-2 rounded-2xl cursor-pointer font-medium text-sm
-    ${
-      category === "others"
-        ? "bg-purple-700 text-white"
-        : "bg-purple-100 text-purple-400"
-    }`}
+    ${category === "others"
+                  ? "bg-purple-700 text-white"
+                  : "bg-purple-100 text-purple-400"
+                }`}
             >
               Other
             </div>
@@ -211,7 +200,7 @@ const Dashboard = () => {
               <input
                 type="text"
                 placeholder="Search expenses... "
-                className="outline-none "
+                className="outline-none  w-full "
                 value={searchExpenses}
                 onChange={(e) => setSearchExpenses(e.target.value)}
               />
@@ -220,17 +209,17 @@ const Dashboard = () => {
               type="date"
               value={fromDate}
               onChange={(e) => setFromDate(e.target.value)}
-              className="outline-none border-1 p-2 border-gray-200 rounded-xl"
+              className="outline-none cursor-pointer border-1 p-2 border-gray-200 rounded-xl"
             />
             <input
               type="date"
               value={toDate}
               onChange={(e) => setToDate(e.target.value)}
-              className="outline-none border-1 p-2 border-gray-200 rounded-xl"
+              className="outline-none cursor-pointer border-1 p-2 border-gray-200 rounded-xl"
             />
-            <button 
+            <button
               onClick={handleReset}
-              className="bg-purple-800 py-1 font-medium rounded-xl px-3 text-white justify-center items-center poppins flex "
+              className="bg-purple-800 hover:bg-purple-700 duration-500 transition-colors cursor-pointer py-1 font-medium rounded-xl px-3 text-white justify-center items-center poppins flex "
             >
               <img src="/assets/reset.svg" width={40} alt="reset" />
             </button>
