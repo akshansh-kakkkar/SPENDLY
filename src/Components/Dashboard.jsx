@@ -34,7 +34,7 @@ const Dashboard = ({
   return (
     <>
       <div>
-        <div className=" lg:w-[85vw] h-[86vh]  w-[100vw] ">
+        <div className=" lg:w-[85vw] h-[100vh] overflow-y-scroll pb-5  w-[100vw] ">
           <div className=" p-8 px-12 flex items-center  justify-between">
             <div className="text-2xl tracking-widest font-medium text-purple-800">
               Dashboard
@@ -112,7 +112,7 @@ const Dashboard = ({
               </div>
             </div>
           </div>
-          <div className="flex gap-4 m-5 justify-start  md:justify-start flex-row  mx-8 flex-wrap items-center">
+          <div className="flex gap-4 m-5 justify-start  md:justify-start flex-row  mx-8 xl:overflow-x-hidden overflow-x-scroll items-center">
             <div
               onClick={() => setCategory("All")}
               className={`px-8 py-2 rounded-2xl cursor-pointer font-medium text-sm
@@ -165,7 +165,7 @@ const Dashboard = ({
             </div>
             <div
               onClick={() => setCategory("recharge")}
-              className={`px-8 py-2 rounded-2xl cursor-pointer font-medium text-sm
+              className={`px-8 py-2 rounded-2xl whitespace-nowrap cursor-pointer font-medium text-sm
     ${category === "recharge"
                   ? "bg-purple-700 text-white"
                   : "bg-purple-100 text-purple-400"
@@ -234,7 +234,7 @@ const Dashboard = ({
               </p>
             </div>
           ) : (
-            <div className="flex justify-center items-center mb-9 shadow-[0_4px_12px_rgba(168,85,247,0.12)] m-6 bg-white h-[40vw] xl:h-[20vw] rounded-xl flex-col">
+            <div className="flex justify-center items-center  m-4 shadow-[0_4px_12px_rgba(168,85,247,0.12)] m-6 bg-white h-[40vh] xl:h-[41vh] rounded-xl flex-col">
               <TableWithoutBorder
                 expenses={filteredExpense}
                 editExpense={editExpense}

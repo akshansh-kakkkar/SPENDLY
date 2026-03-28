@@ -14,7 +14,7 @@ export function TableWithoutBorder({ expenses = [], editExpense, deleteExpense }
     setEditingExpense(expense);
   };
   return (
-    <Card className=" w-[80vw] h-[40vh] overflow-scroll">
+    <Card className=" w-[80vw] h-full  overflow-scroll">
       <DeleteModaal 
         open={deleteOpen}
         onClose={() => setDeleteOpen(false)}
@@ -32,7 +32,7 @@ export function TableWithoutBorder({ expenses = [], editExpense, deleteExpense }
         editExpense={editExpense}
         editingExpense={editingExpense}
       />
-      <table className="w-full min-w-max table-auto border-collapse">
+      <table className="w-full   min-w-max table-auto border-collapse">
         <thead className="border-b border-gray-300">
           <tr>
             {TABLE_HEAD.map((head) => (
@@ -51,12 +51,13 @@ export function TableWithoutBorder({ expenses = [], editExpense, deleteExpense }
         <tbody className="text-center">
           {expenses.map((exp) => {
             return (
-              <tr key={exp.id}>
-                <td className="p-4 border-b border-gray-300">
+              <tr key={exp.id} className="">
+                <td className="p-4 border-b  border-gray-300 text-center">
                   <Typography
                     variant="small"
+                  
                     color="blue-gray"
-                    className="font-bold"
+                    className="font-bold mx-auto truncate max-w-[100px] self-center items-center text-center"
                   >
                     {exp.title}
                   </Typography>
@@ -86,11 +87,11 @@ export function TableWithoutBorder({ expenses = [], editExpense, deleteExpense }
                   </Typography>
                 </td>
                 <td className="p-4 border-b border-l border-gray-300">
-                  <div className="flex justify-around items-center gap-2">
+                  <div className="flex justify-center gap-5 items-center ">
                     <img
                       src="/assets/edit.svg"
                       alt=""
-                      width={30}
+                      width={20}
                       onClick={() => handeEdit(exp)}
                     />
                     <img
@@ -99,7 +100,7 @@ export function TableWithoutBorder({ expenses = [], editExpense, deleteExpense }
                         setDeleteOpen(true);
                       }}
                       src="/assets/bin.png"
-                      width={30}
+                      width={20}
                       alt=""
                     />
                   </div>
